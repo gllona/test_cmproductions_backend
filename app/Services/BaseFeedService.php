@@ -13,8 +13,6 @@ abstract class BaseFeedService implements FeedService
 
     protected function __construct($id) {
         $this->id = $id;
-        $this->sourceFormat = config("feed.${id}.source.format");
-        $this->targetDb = config("feed.${id}.target.db");
     }
 
     // IoC

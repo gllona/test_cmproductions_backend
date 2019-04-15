@@ -19,7 +19,7 @@ class FlubFeedService extends BaseFeedService
         $rawData = file_get_contents(config('feed.flub.source.file'));
 
         /** @var Parser $parser */
-        $parser = resolve(YamlParser::class);   //TODO should be Parser::class
+        $parser = resolve(YamlParser::class);
         $videos = $parser->parse($rawData);
 
         return $videos;
@@ -35,7 +35,7 @@ class FlubFeedService extends BaseFeedService
     function save(VideoData $video)
     {
         /** @var Repository $repository */
-        $repository = resolve(MysqlRepository::class);   //TODO should be Repository::class
+        $repository = resolve(MysqlRepository::class);
         $repository->save($video);
     }
 }

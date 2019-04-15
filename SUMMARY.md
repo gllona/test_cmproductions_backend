@@ -1,6 +1,6 @@
 # Video importer tool
 
-> A solution to Kantox / CMProductions backend test
+> A solution to the Kantox/CMProductions backend test
 >
 > Gorka Llona
 >
@@ -11,7 +11,7 @@ First of all, greets to you Kantox / CMProductions team and thanks for the oppor
 ### Aim
 
 The aim of this solution is to satisfy the requirement in a way that shows some features that could be
-valued you readers positively.
+valued by you readers positively.
 
 ### Design notes
 
@@ -28,11 +28,12 @@ The code shows:
 * SOLI[D]: The Inversion of Control (IoC) approach. At this moment there are two feed sources that are processed using a
   common algorithm: 
   
-  * parse the feed
-  * download the video
-  * save the obtained data
+  1. parse the feed
+  1. download the video
+  1. save the obtained data
   
-  This algorithm is implemented in `Services\BaseFeedService` and each subclass (one for glorf, one for flub)
+  This algorithm is implemented in a generic way in `Services\BaseFeedService` and each subclass 
+  (one for glorf, one for flub)
   must implement three methods for the specifics of the parse, download and save
 
 * [S]OLID: each class and method have a single responsibility
@@ -54,11 +55,11 @@ This project was developed with the latest version of Laravel Homestead (v8.2.0)
 
 ### Repository
 
-This code is available in the following Github URL:
+This code can be cloned from the following Github URL:
 
 `https://github.com/gllona/test_cmproductions_backend.git`
 
-### Test & execute
+### Test & run
 
 Test:
 
@@ -69,11 +70,10 @@ Run:
 * `bin/import glorf`
 * `bin/import flub`
 
-Pass `--details` or `-d` to see the trace of the specific steps taken by the command.
+Pass `--details` or `-d` to the command to see the trace of the specific steps taken.
                                                                                
 ### If more time was available...
 
-1. Write more tests
 1. Document all public methods
 
 Thanks!

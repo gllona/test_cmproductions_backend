@@ -19,7 +19,7 @@ class GlorfFeedService extends BaseFeedService
         $rawData = file_get_contents(config('feed.glorf.source.file'));
 
         /** @var Parser $parser */
-        $parser = resolve(JsonParser::class);   //TODO should be Parser::class
+        $parser = resolve(JsonParser::class);
         $videos = $parser->parse($rawData);
 
         return $videos;
@@ -35,7 +35,7 @@ class GlorfFeedService extends BaseFeedService
     function save(VideoData $video)
     {
         /** @var Repository $repository */
-        $repository = resolve(MysqlRepository::class);   //TODO should be Repository::class
+        $repository = resolve(MysqlRepository::class);
         $repository->save($video);
     }
 }

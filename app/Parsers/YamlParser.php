@@ -31,6 +31,10 @@ class YamlParser
         $videos = array();
 
         foreach ($rawVideos as $rawVideo) {
+            if (! isset($rawVideo['name']) || ! isset($rawVideo['url'])) {
+                throw new BadFormatException('incomplete fields');
+            }
+
             $videos[] = new VideoData(
                 $rawVideo['name'],
                 $rawVideo['url'],

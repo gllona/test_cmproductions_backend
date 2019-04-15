@@ -32,30 +32,30 @@ class FeedServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //TODO check if let this wired
-        $this->app->when(GlorfFeedService::class)
-            ->needs(Parser::class)
-            ->give(function () {
-                return resolve(JsonParser::class);
-            });
-
-        $this->app->when(FlubFeedService::class)
-            ->needs(Parser::class)
-            ->give(function () {
-                return resolve(YamlParser::class);
-            });
-
-        $this->app->when(GlorfFeedService::class)
-            ->needs(Repository::class)
-            ->give(function () {
-                return resolve(MysqlRepository::class);
-            });
-
-        $this->app->when(FlubFeedService::class)
-            ->needs(Repository::class)
-            ->give(function () {
-                return resolve(MysqlRepository::class);
-            });
+        // the following conditional bindings are not needed (left for reference)
+        //$this->app->when(GlorfFeedService::class)
+        //    ->needs(Parser::class)
+        //    ->give(function () {
+        //        return resolve(JsonParser::class);
+        //    });
+        //
+        //$this->app->when(FlubFeedService::class)
+        //    ->needs(Parser::class)
+        //    ->give(function () {
+        //        return resolve(YamlParser::class);
+        //    });
+        //
+        //$this->app->when(GlorfFeedService::class)
+        //    ->needs(Repository::class)
+        //    ->give(function () {
+        //        return resolve(MysqlRepository::class);
+        //    });
+        //
+        //$this->app->when(FlubFeedService::class)
+        //    ->needs(Repository::class)
+        //    ->give(function () {
+        //        return resolve(MysqlRepository::class);
+        //    });
     }
 
     /**

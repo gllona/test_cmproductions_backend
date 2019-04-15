@@ -2,7 +2,7 @@
 
 namespace App\Registries;
 
-use App\Exceptions\UnknownFeedException;
+use App\Exceptions\UnknownEntryException;
 
 class BaseRegistry
 {
@@ -16,7 +16,11 @@ class BaseRegistry
         if (isset($this->registry[$feedName])) {
             return resolve($this->registry[$feedName]);
         } else {
-            throw new UnknownFeedException("Feed source ${feedName} not registered");
+            throw new UnknownEntryException("Registry entry ${feedName} not registered");
         }
+    }
+
+    public function reset() {
+        $this->registry = array();
     }
 }

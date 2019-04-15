@@ -1,0 +1,17 @@
+{
+    "videos": [
+        {
+            "tags": [
+                "thriller",
+                "correctness",
+                "drama"
+            ],
+            "url": "http://glorf.com/external/videos/the-spy-and",
+            "title": "The spy and the voter"
+        },
+        {
+            "url": "http://glorf.com/external/videos/dirty-characters",
+            "title": "Dirty characters"
+        }
+    ]
+}

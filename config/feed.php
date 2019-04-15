@@ -5,19 +5,15 @@ return [
     'glorf' => [
         'id' => 'glorf',
         'source' => [
-            'format' => 'json',
-            'file' => 'feed-exports/glorf.json',
+            'file' => env('FEED_SOURCE_FILE_GLORF'),
         ],
-        'target.db' => 'mysql',
     ],
 
     'flub' => [
         'id' => 'flub',
         'source' => [
-            'format' => 'yaml',
-            'file' => 'feed-exports/flub.yaml',
+            'file' => env('FEED_SOURCE_FILE_FLUB'),
         ],
-        'target.db' => 'mysql',
     ],
 
 ];

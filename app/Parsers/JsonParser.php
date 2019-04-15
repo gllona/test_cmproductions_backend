@@ -30,6 +30,10 @@ class JsonParser implements Parser
         $videos = array();
 
         foreach ($rawVideos->videos as $rawVideo) {
+            if (! isset($rawVideo->title) || ! isset($rawVideo->url)) {
+                throw new BadFormatException('incomplete fields');
+            }
+
             $videos[] = new VideoData(
                 $rawVideo->title,
                 $rawVideo->url,
