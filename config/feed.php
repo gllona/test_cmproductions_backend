@@ -4,14 +4,20 @@ return [
 
     'glorf' => [
         'id' => 'glorf',
-        'source.format' => 'json',
-        'target.db' => 'mysql'
+        'source' => [
+            'format' => 'json',
+            'file' => 'feed-exports/glorf.json',
+        ],
+        'target.db' => 'mysql',
     ],
 
     'flub' => [
         'id' => 'flub',
-        'source.format' => 'yaml',
-        'target.db' => 'mysql'
+        'source' => [
+            'format' => 'yaml',
+            'file' => 'feed-exports/flub.yaml',
+        ],
+        'target.db' => 'mysql',
     ],
 
 ];

@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+use App\Contracts\Parser;
+use App\Contracts\Repository;
+use App\Parsers\JsonParser;
+use App\Repositories\MysqlRepository;
 use App\ValueObjects\VideoData;
 
 class GlorfFeedService extends BaseFeedService
@@ -12,24 +16,26 @@ class GlorfFeedService extends BaseFeedService
 
     public function parseFeed($sourceFormat)
     {
-        echo "glorf.parse\n";
+        $rawData = file_get_contents(config('feed.glorf.source.file'));
 
-        return [
-            new VideoData('dogs eat dogs', 'http://glorf2.com/videos/99.avi', [ 'nature', 'cruel', 'surviving' ]),
-        ];
+        /** @var Parser $parser */
+        $parser = resolve(JsonParser::class);   //TODO should be Parser::class
+        $videos = $parser->parse($rawData);
 
-        // TODO: Implement parseFeed() method.
+        return $videos;
     }
 
     function downloadVideo(VideoData $video)
     {
-        echo "glorf.download\n";
         // TODO: Implement downloadVideo() method.
+        // It is not implemented right now because glorf.com requires username/password
+        $video->setLocalFile('local_file_path');
     }
 
     function save(VideoData $video)
     {
-        echo "glorf.save\n";
-        // TODO: Implement save() method.
+        /** @var Repository $repository */
+        $repository = resolve(MysqlRepository::class);   //TODO should be Repository::class
+        $repository->save($video);
     }
 }

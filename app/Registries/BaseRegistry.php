@@ -8,15 +8,15 @@ class BaseRegistry
 {
     private $registry = array();
 
-    public function register($feedName, $provider) {
-        $this->registry[$feedName] = $provider;
+    public function register($feedName, $class) {
+        $this->registry[$feedName] = $class;
     }
 
     public function get($feedName) {
         if (isset($this->registry[$feedName])) {
-            return $this->registry[$feedName];
+            return resolve($this->registry[$feedName]);
         } else {
-            throw new UnknownFeedException("Source ${feedName} not implemented");
+            throw new UnknownFeedException("Class ${feedName} not found");
         }
     }
 }

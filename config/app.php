@@ -230,6 +230,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // added by developer
+        //'Yaml' => 'Symfony\Component\Yaml\Yaml',   // aliases are not recognized by PhpStorm
+
     ],
 
 ];

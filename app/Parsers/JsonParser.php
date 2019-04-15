@@ -1,15 +1,35 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gorka
- * Date: 4/14/19
- * Time: 8:05 PM
- */
 
 namespace App\Parsers;
 
+use App\Contracts\Parser;
+use App\ValueObjects\VideoData;
 
-class JsonParser
+class JsonParser implements Parser
 {
+    public function parse($rawData)
+    {
+        $json = $this->parseJson($rawData);
+        $videos = $this->buildList($json);
 
+        return $videos;
+    }
+
+    private function parseJson($rawData) {
+        return json_decode($rawData);
+    }
+
+    private function buildList($rawVideos) {
+        $videos = array();
+
+        foreach ($rawVideos->videos as $rawVideo) {
+            $videos[] = new VideoData(
+                $rawVideo->title,
+                $rawVideo->url,
+                isset($rawVideo->tags) ? $rawVideo->tags : array()
+            );
+        }
+
+        return $videos;
+    }
 }

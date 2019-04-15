@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Contracts\FeedService;
 use App\Contracts\ParametrizedCommand;
 use App\Registries\FeedsRegistry;
-use Illuminate\Support\Facades\App;
+use Exception;
 
 class ImportVideoFeed extends ParametrizedCommand
 {
@@ -44,10 +44,13 @@ class ImportVideoFeed extends ParametrizedCommand
     {
         $source = $this->argument('source');
 
-        /** @var FeedService $service */
-        $service = App::make(FeedsRegistry::class)->get($source);
-
-        $service->processFeed($this);
+        try {
+            /** @var FeedService $service */
+            $service = resolve(FeedsRegistry::class)->get($source);
+            $service->processFeed($this);
+        } catch (Exception $e) {
+            $this->error("An error occured while processing command: " . $e->getMessage());
+        }
     }
 
     public function verbose()
