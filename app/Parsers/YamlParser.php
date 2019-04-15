@@ -2,7 +2,9 @@
 
 namespace App\Parsers;
 
+use App\Exceptions\BadFormatException;
 use App\ValueObjects\VideoData;
+use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
 class YamlParser
@@ -16,7 +18,13 @@ class YamlParser
     }
 
     private function parseYaml($rawData) {
-        return Yaml::parse($rawData);
+        try {
+            $yaml = Yaml::parse($rawData);
+        } catch (ParseException $e) {
+            throw new BadFormatException('Yaml parse error with: "' . substr($rawData, 0, 40) . '..."');
+        }
+
+        return $yaml;
     }
 
     private function buildList($rawVideos) {

@@ -16,7 +16,7 @@ class BaseRegistry
         if (isset($this->registry[$feedName])) {
             return resolve($this->registry[$feedName]);
         } else {
-            throw new UnknownFeedException("Class ${feedName} not found");
+            throw new UnknownFeedException("Feed source ${feedName} not registered");
         }
     }
 }

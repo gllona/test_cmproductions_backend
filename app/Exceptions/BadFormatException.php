@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class UnknownSourceFormatException extends Exception
+class BadFormatException extends Exception
 {
     //
 }

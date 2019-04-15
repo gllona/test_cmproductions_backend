@@ -3,6 +3,7 @@
 namespace App\Parsers;
 
 use App\Contracts\Parser;
+use App\Exceptions\BadFormatException;
 use App\ValueObjects\VideoData;
 
 class JsonParser implements Parser
@@ -16,7 +17,13 @@ class JsonParser implements Parser
     }
 
     private function parseJson($rawData) {
-        return json_decode($rawData);
+        $json = json_decode($rawData);
+
+        if ($json === null) {
+            throw new BadFormatException('Json parse error with: "' . substr($rawData, 0, 40) . '..."');
+        }
+
+        return $json;
     }
 
     private function buildList($rawVideos) {
