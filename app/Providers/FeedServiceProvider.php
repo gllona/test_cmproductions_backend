@@ -7,8 +7,6 @@ use App\Contracts\Repository;
 use App\Parsers\JsonParser;
 use App\Parsers\YamlParser;
 use App\Registries\FeedsRegistry;
-use App\Registries\ParsersRegistry;
-use App\Registries\RepositoriesRegistry;
 use App\Repositories\CassandraRepository;
 use App\Repositories\MysqlRepository;
 use App\Services\FlubFeedService;
@@ -19,8 +17,6 @@ class FeedServiceProvider extends ServiceProvider
 {
     public $singletons = [
         FeedsRegistry::class => FeedsRegistry::class,
-        ParsersRegistry::class => ParsersRegistry::class,
-        RepositoriesRegistry::class => RepositoriesRegistry::class,
         JsonParser::class => JsonParser::class,
         YamlParser::class => YamlParser::class,
         MysqlRepository::class => MysqlRepository::class,
@@ -36,19 +32,6 @@ class FeedServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //TODO delete lines
-        //$this->app->singleton(FeedsRegistry::class, function($app) {
-        //    return new FeedsRegistry();
-        //});
-        //
-        //$this->app->singleton(ParsersRegistry::class, function($app) {
-        //    return new ParsersRegistry();
-        //});
-        //
-        //$this->app->singleton(RepositoriesRegistry::class, function($app) {
-        //    return new RepositoriesRegistry();
-        //});
-
         //TODO check if let this wired
         $this->app->when(GlorfFeedService::class)
             ->needs(Parser::class)
@@ -83,8 +66,6 @@ class FeedServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerServices();
-        $this->registerParsers();
-        $this->registerRepositories();
     }
 
     private function registerServices() {
@@ -92,19 +73,5 @@ class FeedServiceProvider extends ServiceProvider
 
         $registry->register(config('feed.glorf.id'), GlorfFeedService::class);
         $registry->register(config('feed.flub.id'), FlubFeedService::class);
-    }
-
-    private function registerParsers() {
-        $registry = resolve(ParsersRegistry::class);
-
-        $registry->register('json', JsonParser::class);
-        $registry->register('yaml', YamlParser::class);
-    }
-
-    private function registerRepositories() {
-        $registry = resolve(RepositoriesRegistry::class);
-
-        $registry->register('mysql', MysqlRepository::class);
-        $registry->register('cassandra', CassandraRepository::class);
     }
 }
